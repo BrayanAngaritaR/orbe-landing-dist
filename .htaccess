@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirige todas las solicitudes al index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+
+  # Opcional: Habilitar la compresión para mejorar el rendimiento
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+  </IfModule>
+
+  # Opcional: Cache-Control para mejorar el rendimiento
+  <IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|html|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|eot|json)$">
+      Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+  </IfModule>
+</IfModule>
